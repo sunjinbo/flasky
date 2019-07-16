@@ -10,6 +10,7 @@ from .forms import NameForm
 def index():
     form = NameForm()
     if form.validate_on_submit():
+        db.create_all()
         user = User.query.filter_by(username=form.name.data).first()
         if user is None:
             user = User(username=form.name.data)
